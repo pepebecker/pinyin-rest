@@ -1,0 +1,21 @@
+{
+  "name": "mandarin-rest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js"
+  },
+  "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "find-hanzi": "git+https://git@github.com/pepebecker/find-hanzi.git",
+    "pinyin-converter": "git+https://git@github.com/pepebecker/pinyin-converter.git",
+    "pinyin-split": "git+https://git@github.com/pepebecker/pinyin-split.git"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
