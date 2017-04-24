@@ -21,7 +21,7 @@
     "express": "^4.15.2",
     "find-hanzi": "pepebecker/find-hanzi",
     "pinyin-converter": "pepebecker/pinyin-converter",
-    "pinyin-split": "pepebecker/pinyin-splitt"
+    "pinyin-split": "pepebecker/pinyin-split"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
