@@ -7,8 +7,16 @@
     "start": "node index.js",
     "watch": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pepebecker/mandarin-rest.git"
+  },
   "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pepebecker/mandarin-rest/issues"
+  },
+  "homepage": "https://github.com/pepebecker/mandarin-rest#readme",
   "dependencies": {
     "express": "^4.15.2",
     "find-hanzi": "git+https://git@github.com/pepebecker/find-hanzi.git",
