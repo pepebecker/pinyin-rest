@@ -1,7 +1,7 @@
 {
   "name": "mandarin-rest",
   "version": "1.0.0",
-  "description": "",
+  "description": "Rest API to convert Chinese characters to Pinyin and convert between Pinyin with tone marks and Pinyin with tone numbers.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -11,15 +11,26 @@
     "type": "git",
     "url": "https://github.com/pepebecker/mandarin-rest.git"
   },
+  "keywords": [
+    "mandarin",
+    "rest",
+    "api",
+    "hanzi",
+    "pinyin",
+    "cangjie",
+    "chinese",
+    "mandarin"
+  ],
   "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/pepebecker/mandarin-rest/issues"
   },
   "homepage": "https://github.com/pepebecker/mandarin-rest#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "find-hanzi": "^1.0.2",
+    "express-markdown": "0.0.6",
+    "find-hanzi": "^1.0.5",
     "pinyin-convert": "^1.0.2",
     "pinyin-split": "^1.0.2"
   },
