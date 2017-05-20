@@ -1,14 +1,14 @@
 # Mandarin Rest
 
-[![dependency status](https://img.shields.io/david/pepebecker/mandarin-rest.svg)](https://david-dm.org/pepebecker/mandarin-rest)
-[![dev dependency status](https://img.shields.io/david/dev/pepebecker/mandarin-rest.svg)](https://david-dm.org/pepebecker/mandarin-rest#info=devDependencies)
-[![MIT-licensed](https://img.shields.io/github/license/pepebecker/mandarin-rest.svg)](https://opensource.org/licenses/MIT)
+[![dependency status](https://img.shields.io/david/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest)
+[![dev dependency status](https://img.shields.io/david/dev/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest#info=devDependencies)
+[![MIT-licensed](https://img.shields.io/github/license/pepebecker/pinyin-rest.svg)](https://opensource.org/licenses/MIT)
 [![chat on gitter](https://badges.gitter.im/pepebecker.svg)](https://gitter.im/pepebecker)
 
 ## Install
 
 ```shell
-npm install pepebecker/mandarin-rest
+npm install pepebecker/pinyin-rest
 ```
 
 ## `GET /pinyin/...`
@@ -16,22 +16,22 @@ npm install pepebecker/mandarin-rest
 ### Examples
 
 ```shell
-curl 'http://mandarin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶'
+curl 'http://pinyin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶'
 => wǒ de māo xǐ huān hē niú nǎi
 ```
 
 ```shell
-curl 'http://mandarin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2'
+curl 'http://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2'
 => wǒ xǐhuān hē chá
 ```
 
 ```shell
-curl 'http://mandarin-rest.pepebecker.com/pinyin/wǒ xǐhuān hē chá'
+curl 'http://pinyin-rest.pepebecker.com/pinyin/wǒ xǐhuān hē chá'
 => wo3 xi3huan1 he1 cha2
 ```
 
 ```shell
-curl 'http://mandarin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true'
+curl 'http://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true'
 => ["wo", "xi", "huan", "he", "cha"]
 ```
 
@@ -40,7 +40,7 @@ curl 'http://mandarin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true'
 ### Examples
 
 ```shell
-curl 'http://mandarin-rest.pepebecker.com/hanzi/喜'
+curl 'http://pinyin-rest.pepebecker.com/hanzi/喜'
 => [
     {
      "hanzi": "喜",
@@ -64,4 +64,4 @@ curl 'http://mandarin-rest.pepebecker.com/hanzi/喜'
 
 ## Contributing
 
-If you **have a question**, **found a bug** or want to **propose a feature**, have a look at [the issues page](https://github.com/pepebecker/mandarin-rest/issues).
+If you **have a question**, **found a bug** or want to **propose a feature**, have a look at [the issues page](https://github.com/pepebecker/pinyin-rest/issues).
