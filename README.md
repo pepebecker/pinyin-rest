@@ -8,7 +8,7 @@
 ## Install
 
 ```shell
-npm install mandarin-rest
+npm install pepebecker/mandarin-rest
 ```
 
 ## `GET /pinyin/...`
