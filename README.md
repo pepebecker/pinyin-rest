@@ -1,4 +1,4 @@
-# Mandarin Rest
+# Pinyin Rest
 
 [![dependency status](https://img.shields.io/david/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest)
 [![dev dependency status](https://img.shields.io/david/dev/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest#info=devDependencies)
