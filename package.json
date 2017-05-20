@@ -28,8 +28,8 @@
   "homepage": "https://github.com/pepebecker/mandarin-rest#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "express-markdown": "0.0.6",
     "find-hanzi": "^1.0.5",
+    "marked": "^0.3.6",
     "pinyin-convert": "^1.0.2",
     "pinyin-split": "^1.0.2"
   },

@@ -4,12 +4,19 @@ const convertPinyin = require('pinyin-convert')
 const splitPinyin = require('pinyin-split')
 const findHanzi = require('find-hanzi')
 const express = require('express')
+const marked = require('marked')
+const fs = require('fs')
+
 const app = express()
 
-app.use(require('express-markdown')({directory: __dirname}))
-
 app.get('/', function (req, res) {
-	res.redirect('/README.md')
+	const path = __dirname + '/README.md'
+	fs.readFile(path, 'utf8', function(err, data) {
+		if (err) {
+			console.log(err);
+		}
+		res.send(marked(data.toString()));
+	})
 })
 
 app.get('/hanzi/:query', function (req, res) {
