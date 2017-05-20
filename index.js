@@ -1,10 +1,16 @@
 'use strict'
 
-const convertPinyin = require('pinyin-converter')
+const convertPinyin = require('pinyin-convert')
 const splitPinyin = require('pinyin-split')
 const findHanzi = require('find-hanzi')
 const express = require('express')
 const app = express()
+
+app.use(require('express-markdown')({directory: __dirname}))
+
+app.get('/', function (req, res) {
+	res.redirect('/README.md')
+})
 
 app.get('/hanzi/:query', function (req, res) {
 	findHanzi(req.params.query, req.query).then((data) => res.send(data), (error) => res.send(error))
