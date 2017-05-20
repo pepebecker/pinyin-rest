@@ -26,7 +26,7 @@ curl 'http://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2'
 ```
 
 ```shell
-curl 'http://pinyin-rest.pepebecker.com/pinyin/wǒ xǐhuān hē chá'
+curl 'http://pinyin-rest.pepebecker.com/pinyin/wǒ xǐhuān hē chá?keepSpaces=true'
 => wo3 xi3huan1 he1 cha2
 ```
 
