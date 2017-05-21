@@ -4,18 +4,21 @@ const convertPinyin = require('pinyin-convert')
 const splitPinyin = require('pinyin-split')
 const findHanzi = require('find-hanzi')
 const express = require('express')
+const corser = require("corser")
 const marked = require('marked')
 const fs = require('fs')
 
 const app = express()
 
+app.use(corser.create())
+
 app.get('/', function (req, res) {
 	const path = __dirname + '/README.md'
 	fs.readFile(path, 'utf8', function(err, data) {
 		if (err) {
-			console.log(err);
+			console.log(err)
 		}
-		res.send(marked(data.toString()));
+		res.send(marked(data.toString()))
 	})
 })
 
