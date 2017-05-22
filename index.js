@@ -6,7 +6,12 @@ const findHanzi = require('find-hanzi')
 const express = require('express')
 const corser = require("corser")
 const marked = require('marked')
+const spdy = require('spdy')
 const fs = require('fs')
+
+const options = require('./options.json')
+options.key =  fs.readFileSync(__dirname + options.key)
+options.cert =  fs.readFileSync(__dirname + options.cert)
 
 const app = express()
 
@@ -34,5 +39,12 @@ app.get('/pinyin/:query', function (req, res) {
 	}
 })
 
-const port = Number(process.env.PORT || 5000)
-app.listen(port, () => console.log("Listening on " + port))
+const port = Number(process.env.PORT || 3000)
+spdy.createServer(options, app).listen(port, (error) => {
+	if (error) {
+		console.error(error)
+		process.exit(1)
+	}
+
+	console.log("Listening on " + port)
+})

@@ -32,7 +32,8 @@
     "find-hanzi": "^1.0.5",
     "marked": "^0.3.6",
     "pinyin-convert": "^1.0.2",
-    "pinyin-split": "^1.0.2"
+    "pinyin-split": "^1.0.2",
+    "spdy": "^3.4.4"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
