@@ -7,11 +7,14 @@ const express = require('express')
 const corser = require("corser")
 const marked = require('marked')
 const spdy = require('spdy')
+const path = require('path')
 const fs = require('fs')
 
+console.log(__dirname)
+
 const options = require('./options.json')
-options.key =  fs.readFileSync(__dirname + options.key)
-options.cert =  fs.readFileSync(__dirname + options.cert)
+options.key = fs.readFileSync(path.join(__dirname, path.relative(__dirname, options.key)))
+options.cert = fs.readFileSync(path.join(__dirname, path.relative(__dirname, options.cert)))
 
 const app = express()
 
