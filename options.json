@@ -1,4 +1,4 @@
 {
-	"key": "/keys/key.pem",
-	"cert": "/keys/cert.pem"
+	"key": "keys/key.pem",
+	"cert": "keys/cert.pem"
 }
