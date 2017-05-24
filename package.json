@@ -1,5 +1,5 @@
 {
-  "name": "mandarin-rest",
+  "name": "pinyin-rest",
   "version": "1.0.0",
   "description": "Rest API to convert Chinese characters to Pinyin and convert between Pinyin with tone marks and Pinyin with tone numbers.",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pepebecker/mandarin-rest.git"
+    "url": "https://github.com/pepebecker/pinyin-rest.git"
   },
   "keywords": [
     "rest",
@@ -23,9 +23,9 @@
   "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pepebecker/mandarin-rest/issues"
+    "url": "https://github.com/pepebecker/pinyin-rest/issues"
   },
-  "homepage": "https://github.com/pepebecker/mandarin-rest#readme",
+  "homepage": "https://github.com/pepebecker/pinyin-rest#readme",
   "dependencies": {
     "corser": "^2.0.1",
     "express": "^4.15.2",
