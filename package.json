@@ -30,10 +30,10 @@
     "corser": "^2.0.1",
     "express": "^4.15.2",
     "find-hanzi": "^1.0.5",
+    "ip": "^1.1.5",
     "marked": "^0.3.6",
     "pinyin-convert": "^1.0.2",
-    "pinyin-split": "^1.0.2",
-    "spdy": "^3.4.4"
+    "pinyin-split": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

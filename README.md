@@ -16,22 +16,22 @@ npm install pepebecker/pinyin-rest
 ### Examples
 
 ```shell
-curl 'http://pinyin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶'
+GET: https://pinyin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶
 => wǒ de māo xǐ huān hē niú nǎi
 ```
 
 ```shell
-curl 'http://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2'
+GET: https://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2
 => wǒ xǐhuān hē chá
 ```
 
 ```shell
-curl 'http://pinyin-rest.pepebecker.com/pinyin/wǒ xǐhuān hē chá?keepSpaces=true'
+GET: https://pinyin-rest.pepebecker.com/pinyin/wǒ xǐhuān hēchá?keepSpaces=true'
 => wo3 xi3huan1 he1 cha2
 ```
 
 ```shell
-curl 'http://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true'
+GET: https://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true
 => ["wo", "xi", "huan", "he", "cha"]
 ```
 
@@ -40,7 +40,7 @@ curl 'http://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true'
 ### Examples
 
 ```shell
-curl 'http://pinyin-rest.pepebecker.com/hanzi/喜'
+GET: https://pinyin-rest.pepebecker.com/hanzi/喜
 => [
     {
      "hanzi": "喜",
