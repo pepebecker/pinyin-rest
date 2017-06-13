@@ -28,12 +28,12 @@
   "homepage": "https://github.com/pepebecker/pinyin-rest#readme",
   "dependencies": {
     "corser": "^2.0.1",
-    "express": "^4.15.2",
-    "find-hanzi": "^1.0.5",
+    "express": "^4.15.3",
+    "find-hanzi": "^1.0.8",
     "ip": "^1.1.5",
     "marked": "^0.3.6",
-    "pinyin-convert": "^1.0.2",
-    "pinyin-split": "^1.0.2"
+    "pinyin-convert": "^1.0.4",
+    "pinyin-split": "^1.0.5"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
