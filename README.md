@@ -61,6 +61,9 @@ GET: https://pinyin-rest.pepebecker.com/hanzi/喜
 - [`find-hanzi`](https://github.com/pepebecker/find-hanzi)
 - [`hanzi-to-pinyin`](https://github.com/pepebecker/hanzi-to-pinyin)
 - [`pinyin-convert`](https://github.com/pepebecker/pinyin-convert)
+- [`pinyin-bot-core`](https://github.com/pepebecker/pinyin-bot-core)
+- [`pinyin-telegram`](https://github.com/pepebecker/pinyin-telegram)
+- [`pinyin-messenger`](https://github.com/pepebecker/pinyin-messenger)
 
 ## Contributing
 
