@@ -15,9 +15,9 @@ const app = express()
 
 app.use(corser.create())
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
 	const path = __dirname + '/README.md'
-	fs.readFile(path, 'utf8', function(err, data) {
+	fs.readFile(path, 'utf8', (err, data) => {
 		if (err) {
 			console.log(err)
 		}
@@ -25,24 +25,42 @@ app.get('/', function (req, res) {
 	})
 })
 
-app.get('/hanzi/:query', function (req, res) {
-	findHanzi(req.params.query, req.query).then((data) => res.send(data), (error) => res.send(error))
+app.get('/hanzi/:query', (req, res) => {
+	findHanzi(req.params.query, req.query)
+	.then(data => res.send(data))
+	.catch(err => res.send(err))
 })
 
-app.get('/pinyin/:query', function (req, res) {
+app.get('/pinyin/:query', (req, res) => {
 	if (req.query.split) {
-		splitPinyin(req.params.query).then((data) => res.send(data), (error) => res.send(error))
+		splitPinyin(req.params.query)
+		.then(data => {
+			res.send({
+				text: data.join(' '),
+				words: data
+			})
+		})
+		.catch(err => {
+			res.send({error: err})
+		})
 	} else {
-		convertPinyin(req.params.query, req.query).then((data) => res.send(data), (error) => res.send(error))
+		convertPinyin(req.params.query, req.query)
+		.then(data => {
+			res.send({
+				text: data
+			})
+		})
+		.catch(err => {
+			res.send({error: err})
+		})
 	}
 })
 
 const port = Number(process.env.PORT || 8080)
-http.createServer(app).listen(port, ip.address(), (error) => {
-	if (error) {
-		console.error(error)
+http.createServer(app).listen(port, ip.address(), err => {
+	if (err) {
+		console.error(err)
 		process.exit(1)
 	}
-
 	console.log(`Server running on http://${ip.address()}:${port}`)
 })
