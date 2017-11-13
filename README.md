@@ -17,22 +17,31 @@ npm install pepebecker/pinyin-rest
 
 ```shell
 GET: https://pinyin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶
-=> wǒ de māo xǐ huān hē niú nǎi
+=> {
+    text: "wǒ de māo xǐ huān hē niú nǎi"
+   }
 ```
 
 ```shell
 GET: https://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2
-=> wǒ xǐhuān hē chá
+=> {
+    text: "wǒ xǐhuān hē chá"
+   }
 ```
 
 ```shell
 GET: https://pinyin-rest.pepebecker.com/pinyin/wǒ xǐhuān hēchá?keepSpaces=true'
-=> wo3 xi3huan1 he1 cha2
+=> {
+    text "wo3 xi3huan1 he1 cha2"
+   }
 ```
 
 ```shell
 GET: https://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true
-=> ["wo", "xi", "huan", "he", "cha"]
+=> {
+    text: "wo xi huan he cha",
+    words: ["wo", "xi", "huan", "he", "cha"]
+   }
 ```
 
 ## `GET /hanzi/...`
@@ -44,11 +53,15 @@ GET: https://pinyin-rest.pepebecker.com/hanzi/喜
 => [
     {
      "hanzi": "喜",
-     "pinyin": ["xǐ", "xī", "chì"],
-     "cangjie": "GRTR",
-     "cangjie2": "土口廿口",
+     "pinyin": "xǐ, xī, chì",
+     "pinyinList" ["xǐ", "xī", "chì"],
+     "zhuyin": "ㄒㄧˇ", // coming soon
+     "zhuyinRomanized": "VU3", // coming soon
+     "cangjie": "土口廿口",
+     "cangjieRomanized": "GRTR",
      "strokes": "12",
      "frequency": "2",
+     "hsk": "1", // coming soon
      "definition": "like, love, enjoy; joyful thing"
     }
    ]
