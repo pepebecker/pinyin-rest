@@ -1,5 +1,7 @@
 # Pinyin Rest
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/pepebecker/pinyin-rest.svg)](https://greenkeeper.io/)
+
 [![dependency status](https://img.shields.io/david/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest)
 [![dev dependency status](https://img.shields.io/david/dev/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest#info=devDependencies)
 [![MIT-licensed](https://img.shields.io/github/license/pepebecker/pinyin-rest.svg)](https://opensource.org/licenses/MIT)
