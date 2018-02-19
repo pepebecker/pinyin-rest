@@ -1,7 +1,7 @@
 {
   "name": "pinyin-rest",
   "version": "1.0.2",
-  "description": "Rest API to convert Chinese characters to Pinyin and convert between Pinyin with tone marks and Pinyin with tone numbers.",
+  "description": "REST API to convert Chinese to Pinyin with tone marks or tone numbers.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -28,14 +28,13 @@
   "homepage": "https://github.com/pepebecker/pinyin-rest#readme",
   "dependencies": {
     "corser": "^2.0.1",
-    "express": "^4.15.3",
-    "find-hanzi": "^1.0.8",
+    "express": "^4.16.2",
     "ip": "^1.1.5",
-    "marked": "^0.3.6",
-    "pinyin-convert": "^1.0.4",
-    "pinyin-split": "^1.0.5"
+    "mdbg": "^1.0.3",
+    "pinyin-convert": "^1.0.8",
+    "pinyin-split": "^1.0.8"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.15.0"
   }
 }

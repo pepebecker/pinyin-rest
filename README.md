@@ -1,4 +1,4 @@
-# Pinyin Rest
+# Pinyin REST
 
 [![dependency status](https://img.shields.io/david/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest)
 [![dev dependency status](https://img.shields.io/david/dev/pepebecker/pinyin-rest.svg)](https://david-dm.org/pepebecker/pinyin-rest#info=devDependencies)
@@ -18,53 +18,86 @@ npm install pepebecker/pinyin-rest
 ```shell
 GET: https://pinyin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶
 => {
-    text: "wǒ de māo xǐ huān hē niú nǎi"
+     "text": "wǒ de māo xǐhuan hē niúnǎi",
+     "data": ["wǒ ", ["de",  "dī",  "dí",  "dì"], " māo xǐhuan ", ["hē", "hè"], " niúnǎi"]
    }
 ```
 
 ```shell
 GET: https://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2
 => {
-    text: "wǒ xǐhuān hē chá"
-   }
-```
-
-```shell
-GET: https://pinyin-rest.pepebecker.com/pinyin/wǒ xǐhuān hēchá?keepSpaces=true'
-=> {
-    text "wo3 xi3huan1 he1 cha2"
+     "text": "wǒ xǐhuān hē chá",
+     "data": "wǒ xǐhuān hē chá"
    }
 ```
 
 ```shell
 GET: https://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true
 => {
-    text: "wo xi huan he cha",
-    words: ["wo", "xi", "huan", "he", "cha"]
+     "text": "wo xi huan he cha",
+     "data": ["wo", "xi", "huan", "he", "cha"]
+   }
+```
+
+## `GET /definition/...`
+
+### Example
+
+```shell
+GET: https://pinyin-rest.pepebecker.com/definition/的
+=> {
+     "de5": [
+       "of",
+       "~'s (possessive particle)",
+       "(used after an attribute)",
+       "(used to form a nominal expression)",
+       "(used at the end of a declarative sentence for emphasis)"
+     ],
+     "di1": [
+       "see 的士[di1 shi4]"
+     ],
+     "di2": [
+       "really and truly"
+     ],
+     "di4": [
+       "aim",
+       "clear"
+     ]
    }
 ```
 
 ## `GET /hanzi/...`
 
-### Examples
+### Example
 
 ```shell
-GET: https://pinyin-rest.pepebecker.com/hanzi/喜
-=> [
-    {
-     "hanzi": "喜",
-     "pinyin": "xǐ, xī, chì",
-     "pinyinList" ["xǐ", "xī", "chì"],
-     "zhuyin": "ㄒㄧˇ", // coming soon
-     "zhuyinRomanized": "VU3", // coming soon
-     "cangjie": "土口廿口",
-     "cangjieRomanized": "GRTR",
-     "strokes": "12",
-     "frequency": "2",
-     "hsk": "1", // coming soon
-     "definition": "like, love, enjoy; joyful thing"
-    }
-   ]
+GET: https://pinyin-rest.pepebecker.com/hanzi/苹果
+=> {
+     "traditional": "蘋果",
+     "simplified": "苹果",
+     "data": {
+       "ping2 guo3": {
+         "mandarin": "píng guǒ",
+         "definitions": [
+           "apple"
+         ],
+         "classifiers": {
+           "ge4": {
+             "traditional": "個",
+             "simplified": "个",
+             "mandarin": "gè",
+             "definition": "classifier for people or objects in general"
+           },
+           "ke1": {
+             "traditional": "顆",
+             "simplified": "颗",
+             "mandarin": "kē",
+             "definition": "classifier for small spheres, pearls, corn grains, teeth, hearts, satellites etc"
+           }
+         }
+       }
+     }
+   }
 ```
 
 ## Related
@@ -80,6 +113,7 @@ GET: https://pinyin-rest.pepebecker.com/hanzi/喜
 - [`pinyin-bot-core`](https://github.com/pepebecker/pinyin-bot-core)
 - [`pinyin-telegram`](https://github.com/pepebecker/pinyin-telegram)
 - [`pinyin-messenger`](https://github.com/pepebecker/pinyin-messenger)
+- [`pinyin-line`](https://github.com/pepebecker/pinyin-line)
 
 ## Contributing
 

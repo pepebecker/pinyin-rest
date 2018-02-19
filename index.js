@@ -2,10 +2,9 @@
 
 const convertPinyin = require('pinyin-convert')
 const splitPinyin = require('pinyin-split')
-const findHanzi = require('find-hanzi')
 const express = require('express')
 const corser = require("corser")
-const marked = require('marked')
+const mdbg = require('mdbg')
 const http = require('http')
 const path = require('path')
 const fs = require('fs')
@@ -16,19 +15,28 @@ const app = express()
 app.use(corser.create())
 
 app.get('/', (req, res) => {
-	const path = __dirname + '/README.md'
-	fs.readFile(path, 'utf8', (err, data) => {
-		if (err) {
-			console.log(err)
-		}
-		res.send(marked(data.toString()))
-	})
+	res.send('<a href="https://github.com/pepebecker/pinyin-rest">View GitHub Repository</a>')
 })
 
 app.get('/hanzi/:query', (req, res) => {
-	findHanzi(req.params.query, req.query)
-	.then(data => res.send(data))
-	.catch(err => res.send(err))
+	const char = mdbg.get(req.params.query)
+	if (char) {
+		res.send(char)
+	} else {
+		res.sendStatus(200)
+	}
+})
+
+app.get('/definition/:query', (req, res) => {
+	const char = mdbg.get(req.params.query)
+	if (char) {
+		res.send(Object.keys(char.data).reduce((o, pinyin) => {
+			o[pinyin] = char.data[pinyin].definitions
+			return o
+		}, {}))
+	} else {
+		res.sendStatus(404)
+	}
 })
 
 app.get('/pinyin/:query', (req, res) => {
@@ -37,17 +45,25 @@ app.get('/pinyin/:query', (req, res) => {
 		.then(data => {
 			res.send({
 				text: data.join(' '),
-				words: data
+				data: data
 			})
 		})
 		.catch(err => {
 			res.send({error: err})
 		})
 	} else {
-		convertPinyin(req.params.query, req.query)
+		convertPinyin(req.params.query, { segmented: true })
 		.then(data => {
+			let text = typeof data === 'string' ? data : data.map(part => {
+				if (typeof part === 'string') {
+					return part
+				} else {
+					return part[0]
+				}
+			}).join('')
 			res.send({
-				text: data
+				text: text,
+				data: data
 			})
 		})
 		.catch(err => {
