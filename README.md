@@ -106,6 +106,8 @@ GET: https://pinyin-rest.pepebecker.com/hanzi/苹果
 - [`pinyin-split`](https://github.com/pepebecker/pinyin-split)
 - [`find-hanzi`](https://github.com/pepebecker/find-hanzi)
 - [`hsk-words`](https://github.com/pepebecker/hsk-words)
+- [`cedict`](https://github.com/pepebecker/cedict)
+- [`mdbg`](https://github.com/pepebecker/mdbg)
 - [`pinyin-or-hanzi`](https://github.com/pepebecker/pinyin-or-hanzi)
 - [`hanzi-to-pinyin`](https://github.com/pepebecker/hanzi-to-pinyin)
 - [`pinyin-convert`](https://github.com/pepebecker/pinyin-convert)
@@ -114,6 +116,9 @@ GET: https://pinyin-rest.pepebecker.com/hanzi/苹果
 - [`pinyin-telegram`](https://github.com/pepebecker/pinyin-telegram)
 - [`pinyin-messenger`](https://github.com/pepebecker/pinyin-messenger)
 - [`pinyin-line`](https://github.com/pepebecker/pinyin-line)
+- [`pinyin-chrome`](https://github.com/pepebecker/pinyin-chrome)
+- [`pinyin-cli`](https://github.com/pepebecker/pinyin-cli)
+- [`hanzi-cli`](https://github.com/pepebecker/hanzi-cli)
 
 ## Contributing
 
