@@ -2,39 +2,39 @@
   "name": "pinyin-rest",
   "version": "1.0.2",
   "description": "REST API to convert Chinese to Pinyin with tone marks or tone numbers.",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "watch": "nodemon index.js"
+  "keywords": [
+    "api",
+    "cangjie",
+    "chinese",
+    "hanzi",
+    "mandarin",
+    "pinyin",
+    "rest"
+  ],
+  "homepage": "https://github.com/pepebecker/pinyin-rest#readme",
+  "bugs": {
+    "url": "https://github.com/pepebecker/pinyin-rest/issues"
   },
+  "license": "MIT",
+  "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/pepebecker/pinyin-rest.git"
   },
-  "keywords": [
-    "rest",
-    "api",
-    "hanzi",
-    "pinyin",
-    "cangjie",
-    "chinese",
-    "mandarin"
-  ],
-  "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pepebecker/pinyin-rest/issues"
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js"
   },
-  "homepage": "https://github.com/pepebecker/pinyin-rest#readme",
   "dependencies": {
     "corser": "^2.0.1",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "ip": "^1.1.5",
-    "mdbg": "^1.0.3",
+    "mdbg": "^1.4.0",
     "pinyin-convert": "^1.0.8",
     "pinyin-split": "^1.0.8"
   },
   "devDependencies": {
-    "nodemon": "^1.15.0"
+    "nodemon": "^1.17.4"
   }
 }
