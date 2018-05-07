@@ -19,24 +19,34 @@ app.get('/', (req, res) => {
 })
 
 app.get('/hanzi/:query', (req, res) => {
-	const char = mdbg.get(req.params.query)
-	if (char) {
-		res.send(char)
-	} else {
-		res.sendStatus(200)
-	}
+	mdbg.get(req.params.query)
+	.then(char => {
+		if (char) {
+			res.send(char)
+		} else {
+			res.sendStatus(200)
+		}
+	})
+	.catch(err => res.send({ error: err }))
 })
 
 app.get('/definition/:query', (req, res) => {
-	const char = mdbg.get(req.params.query)
-	if (char) {
-		res.send(Object.keys(char.data).reduce((o, pinyin) => {
-			o[pinyin] = char.data[pinyin].definitions
-			return o
-		}, {}))
-	} else {
-		res.sendStatus(404)
-	}
+	mdbg.get(req.params.query)
+	.then(data => {
+		const convert = char => {
+			return Object.keys(char.definitions).reduce((o, pinyin) => {
+				o[pinyin] = char.definitions[pinyin].translations
+				return o
+			}, {})
+		}
+		if (data) {
+			if (Array.isArray(data)) res.send(data.map(convert))
+			else res.send(convert(data))
+		} else {
+			res.sendStatus(200)
+		}
+	})
+	.catch(err => res.send({ error: err }))
 })
 
 app.get('/pinyin/:query', (req, res) => {
@@ -48,9 +58,7 @@ app.get('/pinyin/:query', (req, res) => {
 				data: data
 			})
 		})
-		.catch(err => {
-			res.send({error: err})
-		})
+		.catch(err => res.send({ error: err }))
 	} else {
 		convertPinyin(req.params.query, { segmented: true })
 		.then(data => {
@@ -66,10 +74,23 @@ app.get('/pinyin/:query', (req, res) => {
 				data: data
 			})
 		})
-		.catch(err => {
-			res.send({error: err})
-		})
+		.catch(err => res.send({ error: err }))
 	}
+})
+
+app.get('/zhuyin/:query', (req, res) => {
+	mdbg.get(req.params.query)
+		.then(char => {
+			if (char) {
+				res.send(Object.keys(char.definitions).reduce((o, pinyin) => {
+					o[pinyin] = char.definitions[pinyin].zhuyin
+					return o
+				}, {}))
+			} else {
+				res.sendStatus(200)
+			}
+		})
+		.catch(err => res.send({ error: err }))
 })
 
 const port = Number(process.env.PORT || 8080)
