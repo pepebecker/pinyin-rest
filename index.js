@@ -27,7 +27,7 @@ app.get('/hanzi/:query', (req, res) => {
 			res.sendStatus(200)
 		}
 	})
-	.catch(err => res.send({ error: err }))
+	.catch(err => res.send({ error: err.message }))
 })
 
 app.get('/definition/:query', (req, res) => {
@@ -46,7 +46,7 @@ app.get('/definition/:query', (req, res) => {
 			res.sendStatus(200)
 		}
 	})
-	.catch(err => res.send({ error: err }))
+	.catch(err => res.send({ error: err.message }))
 })
 
 app.get('/pinyin/:query', (req, res) => {
@@ -58,7 +58,7 @@ app.get('/pinyin/:query', (req, res) => {
 				data: data
 			})
 		})
-		.catch(err => res.send({ error: err }))
+		.catch(err => res.send({ error: err.message }))
 	} else {
 		convertPinyin(req.params.query, { segmented: true })
 		.then(data => {
@@ -74,7 +74,7 @@ app.get('/pinyin/:query', (req, res) => {
 				data: data
 			})
 		})
-		.catch(err => res.send({ error: err }))
+		.catch(err => res.send({ error: err.message }))
 	}
 })
 
@@ -90,7 +90,7 @@ app.get('/zhuyin/:query', (req, res) => {
 				res.sendStatus(200)
 			}
 		})
-		.catch(err => res.send({ error: err }))
+		.catch(err => res.send({ error: err.message }))
 })
 
 const port = Number(process.env.PORT || 8080)
