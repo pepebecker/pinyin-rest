@@ -32,7 +32,8 @@
     "ip": "^1.1.5",
     "mdbg": "^1.6.0",
     "pinyin-convert": "^1.1.0",
-    "pinyin-split": "^1.0.8"
+    "pinyin-split": "^1.0.8",
+    "zhuyin": "^1.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.4"

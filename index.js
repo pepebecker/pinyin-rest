@@ -3,6 +3,7 @@
 const convertPinyin = require('pinyin-convert')
 const splitPinyin = require('pinyin-split')
 const express = require('express')
+const zhuyin = require('zhuyin')
 const corser = require("corser")
 const mdbg = require('mdbg')
 const http = require('http')
@@ -49,6 +50,20 @@ app.get('/definition/:query', (req, res) => {
 	.catch(err => res.send({ error: err.message }))
 })
 
+const convertToPinyin = query => {
+	return convertPinyin(query, { segmented: true })
+	.then(data => ({
+		text: typeof data === 'string' ? data : data.map(part => {
+			if (typeof part === 'string') {
+				return part
+			} else {
+				return part[0]
+			}
+		}).join(''),
+		data: data
+	}))
+}
+
 app.get('/pinyin/:query', (req, res) => {
 	if (req.query.split) {
 		splitPinyin(req.params.query)
@@ -60,37 +75,35 @@ app.get('/pinyin/:query', (req, res) => {
 		})
 		.catch(err => res.send({ error: err.message }))
 	} else {
-		convertPinyin(req.params.query, { segmented: true })
-		.then(data => {
-			let text = typeof data === 'string' ? data : data.map(part => {
-				if (typeof part === 'string') {
-					return part
-				} else {
-					return part[0]
-				}
-			}).join('')
-			res.send({
-				text: text,
-				data: data
-			})
-		})
+		convertToPinyin(req.params.query)
+		.then(data => res.send(data))
 		.catch(err => res.send({ error: err.message }))
 	}
 })
 
 app.get('/zhuyin/:query', (req, res) => {
 	mdbg.get(req.params.query)
-		.then(char => {
-			if (char) {
-				res.send(Object.keys(char.definitions).reduce((o, pinyin) => {
-					o[pinyin] = char.definitions[pinyin].zhuyin
-					return o
-				}, {}))
-			} else {
-				res.sendStatus(200)
-			}
-		})
-		.catch(err => res.send({ error: err.message }))
+	.then(data => {
+		if (Array.isArray(data)) data = data[0]
+		if (data) {
+			res.send({
+				text: Object.values(data.definitions)[0].zhuyin
+			})
+		} else {
+			res.sendStatus(200)
+		}
+	})
+	.catch(err => {
+		if (err.type === 'NotFoundError') {
+			convertToPinyin(req.params.query)
+			.then(data => zhuyin(data.text))
+			.then(parts => ({ text: parts.join(' ') }))
+			.then(data => res.send(data))
+		} else {
+			return err
+		}
+	})
+	.catch(err => res.send({ error: err.message }))
 })
 
 const port = Number(process.env.PORT || 8080)
