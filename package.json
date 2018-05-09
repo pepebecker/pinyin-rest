@@ -24,7 +24,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js"
+    "watch": "nodemon index.js",
+    "deploy": "pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {
     "corser": "^2.0.1",
