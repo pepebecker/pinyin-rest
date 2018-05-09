@@ -20,29 +20,45 @@ app.get('/', (req, res) => {
 	res.send('<a href="https://github.com/pepebecker/pinyin-rest">View GitHub Repository</a>')
 })
 
+const getByHanzi = async (text, everything) => {
+	const list = []
+	let index = 0
+	while (index < text.length) {
+		let count = text.length - index
+		let wordFound = false
+		while (count >= 0) {
+			const word = text.substr(index, count)
+			try {
+				const entry = await mdbg.getByHanzi(word)
+				wordFound = true
+				index += count - 1
+				list.push(entry)
+				break
+			} catch (err) {
+				if (err.type !== 'NotFoundError') console.error(err)
+			}
+			count--
+		}
+
+		if (!wordFound && everything) {
+			if (index === 0 || typeof list[list.length - 1] === 'object') {
+				list.push(text[index])
+			} else if (typeof list[list.length - 1] === 'string') {
+				list[list.length - 1] += text[index]
+			}
+		}
+
+		index++
+	}
+	return list
+}
 app.get('/hanzi/:query', async (req, res) => {
 	const text = req.params.query
-	const type = pinyinOrHanzi(text)
+	const type = req.query.getBy || pinyinOrHanzi(text)
 	let list = []
 
-	if (type === 'mandarin') {
-		let index = 0
-		while (index < text.length) {
-			let count = text.length - index
-			while (count >= 0) {
-				const word = text.substr(index, count)
-				try {
-					const entry = await mdbg.get(word)
-					index += count - 1
-					list.push(entry)
-					break
-				} catch (err) {
-					if (err.type !== 'NotFoundError') console.error(err)
-				}
-				count--
-			}
-			index++
-		}
+	if (type === 'mandarin' || type === 'hanzi') {
+		list = await getByHanzi(text)	
 	}
 
 	if (type.substr(0, 6) === 'pinyin' || type === 'zhuyin') {
@@ -53,7 +69,9 @@ app.get('/hanzi/:query', async (req, res) => {
 			while (count >= 0) {
 				const word = pinyinList.slice(index, index + count).join(' ')
 				try {
-					const entry = await mdbg.get(word)
+					let entry = null
+					if (req.query.getIndex === 'true') entry = await mdbg.getIndexByPinyin(word)
+					else entry = await mdbg.getByPinyin(word)
 					index += count - 1
 					list.push(entry)
 					break
@@ -88,30 +106,28 @@ app.get('/definition/:query', (req, res) => {
 	.catch(err => res.send({ error: err.message }))
 })
 
-const convertToPinyin = query => {
-	return convertPinyin(query, { segmented: true })
-	.then(data => ({
+const convertToPinyin = async query => {
+	const data = await convertPinyin(query, { everything: true })
+	const body = {
 		text: typeof data === 'string' ? data : data.map(part => {
 			if (typeof part === 'string') {
 				return part
 			} else {
 				return part[0]
 			}
-		}).join(''),
-		data: data
-	}))
+		}).join('')
+	}
+	if (typeof data !== 'string') body.data = data
+	return body
 }
 
 app.get('/pinyin/:query', (req, res) => {
 	if (req.query.split) {
-		splitPinyin(req.params.query)
-		.then(data => {
-			res.send({
-				text: data.join(' '),
-				data: data
-			})
+		const list = splitPinyin(req.params.query, true)
+		res.send({
+			text: list.join(' '),
+			data: list
 		})
-		.catch(err => res.send({ error: err.message }))
 	} else {
 		convertToPinyin(req.params.query)
 		.then(data => res.send(data))
@@ -119,29 +135,38 @@ app.get('/pinyin/:query', (req, res) => {
 	}
 })
 
-app.get('/zhuyin/:query', (req, res) => {
-	mdbg.get(req.params.query)
-	.then(data => {
-		if (Array.isArray(data)) data = data[0]
-		if (data) {
+app.get('/zhuyin/:query', async (req, res) => {
+	const text = req.params.query
+	const type = pinyinOrHanzi(text)
+	if (type === 'zhuyin') {
+		if (req.query.split) {
+			const list = zhuyin.split(text, true)
 			res.send({
-				text: Object.values(data.definitions)[0].zhuyin
+				text: list.join(' '),
+				data: list
 			})
 		} else {
-			res.sendStatus(200)
+			res.send({ text: text })
 		}
-	})
-	.catch(err => {
-		if (err.type === 'NotFoundError') {
-			convertToPinyin(req.params.query)
-			.then(data => zhuyin(data.text))
-			.then(parts => ({ text: parts.join(' ') }))
-			.then(data => res.send(data))
-		} else {
-			return err
-		}
-	})
-	.catch(err => res.send({ error: err.message }))
+	}
+	if (type.substr(0, 6) === 'pinyin') {
+		const list = zhuyin.fromPinyin(text, true)
+		res.send({
+			text: list.join(' '),
+			data: list
+		})
+	}
+	if (type === 'mandarin') {
+		let list = await getByHanzi(text, true)
+		list = list.map(item => {
+			if (typeof item === 'string') return item
+			return Object.values(item.definitions).map(def => def.zhuyin)
+		})
+		res.send({
+			text: list.join(' '),
+			data: list
+		})
+	}
 })
 
 const port = Number(process.env.PORT || 8080)
