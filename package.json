@@ -31,10 +31,11 @@
     "corser": "^2.0.1",
     "express": "^4.16.3",
     "ip": "^1.1.5",
-    "mdbg": "^1.6.0",
-    "pinyin-convert": "^1.1.0",
-    "pinyin-split": "^1.0.8",
-    "zhuyin": "^1.3.0"
+    "mdbg": "^1.7.0",
+    "pinyin-convert": "^1.2.0",
+    "pinyin-or-hanzi": "^1.2.0",
+    "pinyin-split": "^1.2.0",
+    "zhuyin": "^1.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.4"

@@ -1,5 +1,6 @@
 'use strict'
 
+const pinyinOrHanzi = require('pinyin-or-hanzi')
 const convertPinyin = require('pinyin-convert')
 const splitPinyin = require('pinyin-split')
 const express = require('express')
@@ -19,16 +20,53 @@ app.get('/', (req, res) => {
 	res.send('<a href="https://github.com/pepebecker/pinyin-rest">View GitHub Repository</a>')
 })
 
-app.get('/hanzi/:query', (req, res) => {
-	mdbg.get(req.params.query)
-	.then(char => {
-		if (char) {
-			res.send(char)
-		} else {
-			res.sendStatus(200)
+app.get('/hanzi/:query', async (req, res) => {
+	const text = req.params.query
+	const type = pinyinOrHanzi(text)
+	let list = []
+
+	if (type === 'mandarin') {
+		let index = 0
+		while (index < text.length) {
+			let count = text.length - index
+			while (count >= 0) {
+				const word = text.substr(index, count)
+				try {
+					const entry = await mdbg.get(word)
+					index += count - 1
+					list.push(entry)
+					break
+				} catch (err) {
+					if (err.type !== 'NotFoundError') console.error(err)
+				}
+				count--
+			}
+			index++
 		}
-	})
-	.catch(err => res.send({ error: err.message }))
+	}
+
+	if (type.substr(0, 6) === 'pinyin' || type === 'zhuyin') {
+		const pinyinList = (type === 'zhuyin' ? zhuyin.toPinyin(text, { numbered: true }) : splitPinyin(text))
+		let index = 0
+		while (index < pinyinList.length) {
+			let count = pinyinList.length - index
+			while (count >= 0) {
+				const word = pinyinList.slice(index, index + count).join(' ')
+				try {
+					const entry = await mdbg.get(word)
+					index += count - 1
+					list.push(entry)
+					break
+				} catch (err) {
+					if (err.type !== 'NotFoundError') console.error(err)
+				}
+				count--
+			}
+			index++
+		}
+	}
+
+	res.send(list)
 })
 
 app.get('/definition/:query', (req, res) => {
