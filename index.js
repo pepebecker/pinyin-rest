@@ -160,6 +160,7 @@ app.get('/zhuyin/:query', async (req, res) => {
 		let list = await getByHanzi(text, true)
 		list = list.map(item => {
 			if (typeof item === 'string') return item
+			if (Object.values(item.definitions).length === 1) return Object.values(item.definitions)[0].zhuyin
 			return Object.values(item.definitions).map(def => def.zhuyin)
 		})
 		res.send({
