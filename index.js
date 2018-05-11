@@ -16,6 +16,8 @@ const app = express()
 
 app.use(corser.create())
 
+mdbg.init()
+
 app.get('/', (req, res) => {
 	res.send('<a href="https://github.com/pepebecker/pinyin-rest">View GitHub Repository</a>')
 })
