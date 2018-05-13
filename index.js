@@ -1,6 +1,7 @@
 'use strict'
 
 const pinyinOrHanzi = require('pinyin-or-hanzi')
+const hanziToZhuyin = require('hanzi-to-zhuyin')
 const convertPinyin = require('pinyin-convert')
 const splitPinyin = require('pinyin-split')
 const express = require('express')
@@ -15,8 +16,6 @@ const ip = require('ip')
 const app = express()
 
 app.use(corser.create())
-
-mdbg.init()
 
 app.get('/', (req, res) => {
 	res.send('<a href="https://github.com/pepebecker/pinyin-rest">View GitHub Repository</a>')
@@ -109,7 +108,7 @@ app.get('/definition/:query', (req, res) => {
 })
 
 const convertToPinyin = async query => {
-	const data = await convertPinyin(query, { everything: true })
+	const data = await convertPinyin(query, { everything: true, segmented: true })
 	const body = {
 		text: typeof data === 'string' ? data : data.map(part => {
 			if (typeof part === 'string') {
@@ -123,17 +122,28 @@ const convertToPinyin = async query => {
 	return body
 }
 
-app.get('/pinyin/:query', (req, res) => {
-	if (req.query.split) {
-		const list = splitPinyin(req.params.query, true)
+app.get('/pinyin/:query', async (req, res) => {
+	const text = req.params.query
+	const type = pinyinOrHanzi(text)
+	if (type === 'zhuyin') {
+		const list = zhuyin.toPinyin(req.params.query, { everything: true })
 		res.send({
-			text: list.join(' '),
+			text: list.join(''),
 			data: list
 		})
-	} else {
-		convertToPinyin(req.params.query)
-		.then(data => res.send(data))
-		.catch(err => res.send({ error: err.message }))
+	}
+	if (type.substr(0, 6) === 'pinyin' || type === 'mandarin') {
+		if (req.query.split) {
+			const list = splitPinyin(req.params.query, true)
+			res.send({
+				text: list.join(' '),
+				data: list
+			})
+		} else {
+			convertToPinyin(req.params.query, { everything: true, segmented: true })
+			.then(data => res.send(data))
+			.catch(err => res.send({ error: err.message }))
+		}
 	}
 })
 
@@ -154,19 +164,14 @@ app.get('/zhuyin/:query', async (req, res) => {
 	if (type.substr(0, 6) === 'pinyin') {
 		const list = zhuyin.fromPinyin(text, true)
 		res.send({
-			text: list.join(' '),
+			text: list.join(''),
 			data: list
 		})
 	}
 	if (type === 'mandarin') {
-		let list = await getByHanzi(text, true)
-		list = list.map(item => {
-			if (typeof item === 'string') return item
-			if (Object.values(item.definitions).length === 1) return Object.values(item.definitions)[0].zhuyin
-			return Object.values(item.definitions).map(def => def.zhuyin)
-		})
+		const list = await hanziToZhuyin(text, { everything: true, segmented: true })
 		res.send({
-			text: list.join(' '),
+			text: list.map(item => typeof item === 'string' ? item : item[0]).join(''),
 			data: list
 		})
 	}
