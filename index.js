@@ -14,7 +14,6 @@ const fs = require('fs')
 const ip = require('ip')
 
 const app = express()
-
 app.use(corser.create())
 
 app.get('/', (req, res) => {
@@ -178,10 +177,12 @@ app.get('/zhuyin/:query', async (req, res) => {
 })
 
 const port = Number(process.env.PORT || 8080)
-http.createServer(app).listen(port, ip.address(), err => {
+http.createServer(app).listen(port, ip.address(), async err => {
 	if (err) {
 		console.error(err)
 		process.exit(1)
+	} else {
+		console.log(`Server running on http://${ip.address()}:${port}`)
+		convertPinyin.init(await hanziToZhuyin.init(await mdbg.init()))
 	}
-	console.log(`Server running on http://${ip.address()}:${port}`)
 })
