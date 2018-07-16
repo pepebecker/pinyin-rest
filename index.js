@@ -176,6 +176,18 @@ app.get('/zhuyin/:query', async (req, res) => {
 	}
 })
 
+app.get('/hsk/:query', async (req, res) => {
+	try {
+		if (req.query.getIndex === 'true') {
+			res.send(await mdbg.getIndexByHSK(req.params.query))
+		} else {
+			res.send(await mdbg.getByHSK(req.params.query))
+		}
+	} catch (err) {
+		res.send({ error: err })
+	}
+})
+
 const port = Number(process.env.PORT || 8080)
 http.createServer(app).listen(port, ip.address(), async err => {
 	if (err) {
