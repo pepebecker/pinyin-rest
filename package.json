@@ -32,13 +32,13 @@
     "express": "^4.16.3",
     "hanzi-to-zhuyin": "^1.4.0",
     "ip": "^1.1.5",
-    "mdbg": "^1.14.0",
+    "mdbg": "^1.22.0",
     "pinyin-convert": "^1.6.0",
-    "pinyin-or-hanzi": "^1.4.0",
-    "pinyin-split": "^1.4.0",
+    "pinyin-or-hanzi": "^1.12.0",
+    "pinyin-split": "^1.12.0",
     "zhuyin": "^1.7.0"
   },
   "devDependencies": {
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.18.4"
   }
 }
