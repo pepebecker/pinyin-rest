@@ -15,30 +15,30 @@
   "bugs": {
     "url": "https://github.com/pepebecker/pinyin-rest/issues"
   },
-  "license": "MIT",
-  "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/pepebecker/pinyin-rest.git"
   },
+  "license": "MIT",
+  "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
+  "main": "index.js",
   "scripts": {
+    "deploy": "pm2 deploy ecosystem.config.js production",
     "start": "node index.js",
-    "watch": "nodemon index.js",
-    "deploy": "pm2 deploy ecosystem.config.js production"
+    "watch": "nodemon index.js"
   },
   "dependencies": {
     "corser": "^2.0.1",
-    "express": "^4.16.3",
-    "hanzi-to-zhuyin": "^1.4.0",
+    "express": "^4.16.4",
+    "hanzi-to-zhuyin": "^1.6.0",
     "ip": "^1.1.5",
-    "mdbg": "^1.22.0",
-    "pinyin-convert": "^1.6.0",
-    "pinyin-or-hanzi": "^1.12.0",
-    "pinyin-split": "^1.12.0",
-    "zhuyin": "^1.7.0"
+    "mdbg": "^1.29.0",
+    "pinyin-convert": "^1.8.0",
+    "pinyin-or-hanzi": "^1.15.0",
+    "pinyin-split": "^1.25.0",
+    "zhuyin": "^1.9.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.6"
   }
 }
