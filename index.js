@@ -120,8 +120,15 @@ const convertToPinyin = async query => {
 }
 
 app.get('/pinyin/:query', async (req, res) => {
-	const text = req.params.query
-	const type = pinyinOrHanzi(text)
+	if (req.query.split) {
+		const list = splitPinyin(req.params.query, req.query.everything, req.query.wrapInList)
+		res.send({
+			text: list.join(' '),
+			data: list
+		})
+		return
+	}
+	const type = pinyinOrHanzi(req.params.query)
 	if (type === 'zhuyin') {
 		const list = zhuyin.toPinyin(req.params.query, { everything: true })
 		res.send({
@@ -130,17 +137,9 @@ app.get('/pinyin/:query', async (req, res) => {
 		})
 	}
 	if (type.substr(0, 6) === 'pinyin' || type === 'mandarin') {
-		if (req.query.split) {
-			const list = splitPinyin(req.params.query, true)
-			res.send({
-				text: list.join(' '),
-				data: list
-			})
-		} else {
-			convertToPinyin(req.params.query, { everything: true, segmented: true })
-			.then(data => res.send(data))
-			.catch(err => res.send({ error: err.message }))
-		}
+		convertToPinyin(req.params.query, { everything: true, segmented: true })
+		.then(data => res.send(data))
+		.catch(err => res.send({ error: err.message }))
 	}
 })
 
