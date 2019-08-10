@@ -20,7 +20,7 @@
     "url": "https://github.com/pepebecker/pinyin-rest.git"
   },
   "license": "MIT",
-  "author": "Pepe Becker <mail@pepebecker.com> (http://pepebecker.com)",
+  "author": "Pepe Becker <mail@pepebecker.com> (https://pepe.asia)",
   "main": "index.js",
   "scripts": {
     "deploy": "pm2 deploy ecosystem.config.js production",
