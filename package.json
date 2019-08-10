@@ -21,6 +21,7 @@
   },
   "license": "MIT",
   "author": "Pepe Becker <mail@pepebecker.com> (https://pepe.asia)",
+  "bin": "index.js",
   "main": "index.js",
   "scripts": {
     "deploy": "pm2 deploy ecosystem.config.js production",
