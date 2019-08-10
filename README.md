@@ -8,7 +8,7 @@
 ## Install
 
 ```shell
-npm install pepebecker/pinyin-rest
+npm install pinyin-rest
 ```
 
 ## `GET /pinyin/...`
@@ -16,7 +16,7 @@ npm install pepebecker/pinyin-rest
 ### Examples
 
 ```shell
-GET: https://pinyin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶
+GET: https://api.pinyin.pepe.asia/pinyin/我的猫喜欢喝牛奶
 => {
      "text": "wǒ de māo xǐhuan hē niúnǎi",
      "data": ["wǒ ", ["de",  "dī",  "dí",  "dì"], " māo xǐhuan ", ["hē", "hè"], " niúnǎi"]
@@ -24,7 +24,7 @@ GET: https://pinyin-rest.pepebecker.com/pinyin/我的猫喜欢喝牛奶
 ```
 
 ```shell
-GET: https://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2
+GET: https://api.pinyin.pepe.asia/pinyin/wo3 xi3huan1 he1 cha2
 => {
      "text": "wǒ xǐhuān hē chá",
      "data": "wǒ xǐhuān hē chá"
@@ -32,7 +32,7 @@ GET: https://pinyin-rest.pepebecker.com/pinyin/wo3 xi3huan1 he1 cha2
 ```
 
 ```shell
-GET: https://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true
+GET: https://api.pinyin.pepe.asia/pinyin/woxihuanhecha?split=true
 => {
      "text": "wo xi huan he cha",
      "data": ["wo", "xi", "huan", "he", "cha"]
@@ -44,7 +44,7 @@ GET: https://pinyin-rest.pepebecker.com/pinyin/woxihuanhecha?split=true
 ### Example
 
 ```shell
-GET: https://pinyin-rest.pepebecker.com/definition/的
+GET: https://api.pinyin.pepe.asia/definition/的
 => {
      "de5": [
        "of",
@@ -71,7 +71,7 @@ GET: https://pinyin-rest.pepebecker.com/definition/的
 ### Example
 
 ```shell
-GET: https://pinyin-rest.pepebecker.com/hanzi/苹果
+GET: https://api.pinyin.pepe.asia/hanzi/苹果
 => {
      "traditional": "蘋果",
      "simplified": "苹果",
